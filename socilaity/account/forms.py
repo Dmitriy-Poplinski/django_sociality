@@ -25,11 +25,28 @@ class UserRegistrationForm(forms.ModelForm):
 
         return cleaned_data["password2"]
 
+    def clean_email(self):
+        data = self.cleaned_data
+
+        if User.objects.filter(email=data).exists():
+            raise forms.ValidationError("Email already registered!")
+
+        return data
+
 
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("username", "first_name", "email",)
+
+    def clean_email(self):
+        data = self.cleaned_data
+        qr = User.objects.exclude(id=self.instance.id).filter(email=data)
+
+        if qr.exists():
+            raise forms.ValidationError("Email already registered!")
+
+        return data
 
 
 class ProfileEditForm(forms.ModelForm):

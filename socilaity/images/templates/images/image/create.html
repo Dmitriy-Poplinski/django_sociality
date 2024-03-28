@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Sociality an image{% endblock %}
+
+{% block content %}
+  <h1>Sociality an image.</h1>
+  <img src="{{ request.GET.url }}" class="image-preview">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Sociality it!">
+  </form>
+{% endblock %}

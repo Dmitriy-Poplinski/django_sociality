@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "images.apps.ImagesConfig"
+    "images.apps.ImagesConfig",
+    "django_extensions",
 ]
+
+SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
